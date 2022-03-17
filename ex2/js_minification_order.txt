@@ -1,0 +1,7 @@
+1. Install Node.js
+2. Run in your project folder (npm init -y)
+3. npm install terser
+4. Now, to minify a file called , run in the terminal.
+   like_button.js
+
+5. npx terser -c -m -o like_button.min.js -- like_button.js

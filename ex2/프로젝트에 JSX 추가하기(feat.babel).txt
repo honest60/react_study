@@ -1,0 +1,12 @@
+참조 URL : 
+https://ko.reactjs.org/docs/add-react-to-a-website.html#add-react-in-one-minute
+-----------------------------------------------------------------------
+
+npm init -y
+
+npm install babel-cli@6 babel-preset-react-app@3
+
+* JSX 전처리기 실행하기
+src 폴더를 만들고 다음 터미널 명령어를 실행하세요.
+
+npx babel --watch src --out-dir . --presets react-app/prod
