@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.css';                               // 전체 앱에 적용되는 전역 스타일
 import App from './App';
-
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
+ReactDOM.render(                                    // render(가져올 데이터 쪽/ 데이터를 쓸 쪽)
   <React.StrictMode>
-    <App />
+    <App subject="SKY"/>
   </React.StrictMode>,
   document.getElementById('root')
 );
