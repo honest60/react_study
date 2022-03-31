@@ -136,11 +136,16 @@ function App2(props) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          새로 만든 테스트, {subject}!
+          새로 만든 테스트~, {subject}!
         </a>
+        
       </header>
 
-      <p>컴포넌트는 필요한 모듈을 불러오고 그들 자신을 파일의 하단에서 내보낼 수 있습니다.</p>
+      <p> * 컴포넌트는 필요한 모듈을 불러오고 <br></br>그들 자신을 파일의 하단에서 내보낼 수 있습니다.</p>
+      <p> * 컴포넌트 함수는 PascalCase로 명명합니다.</p>
+      <p> * JSX 변수는 중괄호 so 중괄호와 같이 중괄호 사이에 넣어 읽을 수 있습니다.</p>
+      <p> *  HTML의 class는 JSX에서는 className입니다.</p>
+      <p> * props는 컴포넌트 호출에 속성처럼 쓰이고, 컴포넌트로 전달됩니다.</p>
     </div>
   );
 }  
