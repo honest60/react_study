@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
+import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
-import Form from "./components/Form";
-import './css/Form.css'
 
 function App(props) {
     // filter start
@@ -40,10 +39,8 @@ function App(props) {
     ));
     // Todo components end 
   
-    // 소제목 부분 값 control // start
     const tasksNoun = taskList.length > 1 ? 'tasks' : 'task';
     const headingText = `${taskList.length} ${tasksNoun} remaining~!!`;    
-    // 소제목 부분 값 control // end
 
     function addTask(name) {
         const newTask = { id: "todo-" + nanoid(), name: name, completed: false };
@@ -125,3 +122,5 @@ function App(props) {
   }
   
   export default App;
+  //# 파일들을 삭제
+  //rm -- App.test.js App.css logo.svg serviceWorker.js setupTests.js
