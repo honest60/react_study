@@ -1,0 +1,114 @@
+<!-- setState 방식 -->
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>구구단</title>
+        <!-- 필수 cf) 배포시 development 를 production 으로 변경 / start -->
+        <!-- react 가 동작하는데 필요한 핵심 파일 -->
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <!-- react-dom은 react code를 웹에 붙여주는 역할-->
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <!-- JSX 문법을 쓸 수 있게 지원함 -->
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <!-- 필수 / end -->
+    </head>
+
+    <body>
+        <div id="root"></div> <!-- 결과: <div id="root"><button>Like<button></div>-->
+        <script type="text/babel">
+            class GuGuDan extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        first: Math.ceil(Math.random() * 9),
+                        second: Math.ceil(Math.random() * 9),
+                        value: '',
+                        result: ''
+                    };
+                }
+                
+                // method 화 해서 html 소스와 분리해서 작성할 것 // 주의) 메소드로 분리해서 선언 시, 무조건 화살표 함수를 쓸 것. (this 값이 바뀔 수 있음)
+                onSubmit = (e) => {
+                    e.preventDefault();
+                    if (parseInt(this.state.value) === this.state.first * this.state.second) {
+                        this.setState( (prevState) => { // prevState : 예전 상태값을 가지는 API
+                            return {
+                                result: this.state.first + ' X ' + this.state.second + ' = ' + (prevState.value) + ' 정답!',
+                                first: Math.ceil(Math.random() * 9),
+                                second: Math.ceil(Math.random() * 9),
+                                value: ''
+                            };
+                            
+                            this.setState((prevState) =>{       //this.state 가 들어갈 때는 prevState 를 사용한다.
+                                return {
+                                    value: prevState.value + 1
+                                };                          
+                            });
+                        });
+                    }else {
+                        this.setState({
+                            result: '땡', 
+                            value: ''
+                        });
+                    }
+                    this.input.focus();
+                };
+
+                onChange = (e) => {
+                    this.setState({ value : e.target.value });
+                };
+                
+                input;
+
+                onRefInput = (c) => { this.input = c; };
+                
+                //컨텐츠 // this.setState를 하면 render를 다시 읽음. 너무 많이 쓰면 속도가 느려짐
+                // 10초 걸리는 작업 long();
+                // render 안에 함수는 전부 메서드화 해서 뺄 것/ 안그러면 render() 호출할 때 마다, 해당 함수를 계속 생성함
+                // htmlFor
+                render() {
+                    console.log('렌더링');
+                    return ( 
+                        <>
+                            <div>{this.state.first}곱하기{this.state.second}는</div>
+                            <form onSubmit={this.onSubmit}>
+                                <input ref={this.onRefInput} type="number" value={this.state.value} onChange={this.onChange}/>
+                                <button>입력!</button> 
+                            </form>
+                            <div>{this.state.result}</div>
+                        </>
+                    );
+                }
+            }
+
+            class PresentButton extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        present: false
+                    }
+                }
+
+                render() {
+                    return (
+                        <button onClick={() => { 
+                            this.setState({ present : true })
+                        }}>
+                            {this.state.present ? '참 잘했어요' : '대기중'}
+                        </button>
+                    );
+                }
+            }            
+        </script>
+        <script type="text/babel">
+            ReactDOM.render(
+                <div>
+                    <GuGuDan/><br></br>
+                    <PresentButton/><br></br>
+                </div>
+                , 
+                document.querySelector('#root')
+            );
+        </script>
+    </body>
+</html>

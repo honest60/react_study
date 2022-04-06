@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <!-- 필수 cf) 배포시 development 를 production 으로 변경 / start -->
+        <!-- react 가 동작하는데 필요한 핵심 파일 -->
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <!-- react-dom은 react code를 웹에 붙여주는 역할-->
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <!-- JSX 문법을 쓸 수 있게 지원함 -->
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <!-- 필수 / end -->
+    </head>
+
+    <body>
+        <div id="root"></div> <!-- 결과: <div id="root"><button>Like<button></div>-->
+        <script type="text/babel">
+            class LikeButton extends React.Component {  // class 하나가 Component 하나임
+                constructor(props) {
+                    super(props);
+                    // 바뀔 여지가 있는, 화면상의 바뀌는 부분이 상태(state)입니다. 하단은 초기값 setting.
+                    // 안바뀌는 부분은 태그로.
+                    this.state = {
+                        liked: false,
+                    }
+                }
+
+                render() {  // render 가 어떻게 화면에 보여줄 지를 결정하는 부분 // JSX ( JS + XML )
+                    return <button onClick={() => { this.setState({ liked : true}) }}>
+                                {this.state.liked ? '좋아요 누름' : '좋아요'} 
+                            </button>;      // <button onClick="onClick">Like<button> 을 만들겠다.
+                }
+                
+            }
+        </script>
+        <script type="text/babel">
+            // ReactDOM이 화면에 실제로 구현해주는 역할(render) / render(만들 Component, 만들 위치);
+            ReactDOM.render(
+                <div>
+                    <LikeButton/>
+                    <LikeButton/>
+                    <LikeButton/>
+                    <LikeButton/>
+                    <LikeButton/>
+                </div>, 
+                document.querySelector('#root')
+            );
+        </script>
+    </body>
+</html>

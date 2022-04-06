@@ -1,0 +1,71 @@
+<!-- hooks 방식 -->
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>구구단</title>
+        <!-- 필수 cf) 배포시 development 를 production 으로 변경 / start -->
+        <!-- react 가 동작하는데 필요한 핵심 파일 -->
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <!-- react-dom은 react code를 웹에 붙여주는 역할-->
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <!-- JSX 문법을 쓸 수 있게 지원함 -->
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <!-- 필수 / end -->
+    </head>
+
+    <body>
+        <div id="root"></div> 
+        <script type="text/babel">
+            // class Gugudan extends React.Component {}
+            const Gugudan = () => {              // setState 와 ref를 안쓸 경우, 보통 함수로 표현 -> 원래는 못쓰는데 가능하게 한게 Hooks 임
+                // 해당 컴포넌트의 state는 반드시 Component 내부에 위치해야 함.
+                // useState -> use 로 시작하는 게 Hook다.
+                const [first, setFirst] = React.useState(Math.ceil(Math.random() *9));
+                const [second, setSecond] = React.useState(Math.ceil(Math.random() *9));
+                const [value, setValue] = React.useState('');
+                const [result, setResult] = React.useState('');
+                const inputRef = React.useRef(null);
+
+                const onSubmitForm = (e) => {
+                    e.preventDefault();
+                    if (parseInt(value) === first * second) {
+                        setResult(first + ' X ' + second + ' = ' + value + ' 정답!');
+                        setFirst(Math.ceil(Math.random() * 9));
+                        setSecond(Math.ceil(Math.random() * 9));
+                        setValue('');
+                    }else {
+                        setResult('땡');
+                        setValue('');
+                    }
+                    inputRef.current.focus();
+                };
+
+                const onChangeInput = (e) => {
+                    setValue(e.target.value);
+                };
+                
+                console.log("렌더링");
+                
+                return (
+                    <>
+                        <div>{first} 곱하기 {second} 는?</div>
+                        <form onSubmit={onSubmitForm}>
+                            <input ref={inputRef} onChange={onChangeInput} value={value}/>
+                            <button>입력!</button>
+                        </form>
+                        <div id="result">{result}</div>
+                    </>
+                );
+            }
+        </script>
+        <script type="text/babel">
+            ReactDOM.render(
+                <div>
+                    <Gugudan/>                    
+                </div>
+                , 
+                document.querySelector('#root')
+            );
+        </script>
+    </body>
+</html>
