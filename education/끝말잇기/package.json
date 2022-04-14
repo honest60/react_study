@@ -1,0 +1,23 @@
+{
+  "name": "wordrelay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack"
+  },
+  "author": "ChamPark",
+  "license": "MIT",
+  "dependencies": {
+    "react": "0.0.0-experimental-168da8d55-20220412",
+    "react-dom": "0.0.0-experimental-168da8d55-20220412"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.4",
+    "webpack": "^5.71.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
